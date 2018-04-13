@@ -14,7 +14,7 @@ Gun MC:
 
 ****/
 
-function EvilHatPeep(scene){
+function EvilHatPeep(scene) {
 
     var self = this;
     Peep.apply(self, [scene]);
@@ -28,15 +28,15 @@ function EvilHatPeep(scene){
 
     // Position.
     self.loop = false;
-    self.x = -300;
+    self.x = -300 * Game.width / 960;
     //self.x = 300; // HAAAACK
-    self.y = 470;
+    self.y = 470 * Game.width / 960;
     self.direction = 0;
 
     // WHO TO KILL
     self.victim = null; // plz tell this peep.
     self.freezeEveryone = null; // plz tell this peep.
-    self.bang = null; // plz tell this peep. 
+    self.bang = null; // plz tell this peep.
 
     // Goes through the spot...
     var doubles = 0;
@@ -44,44 +44,44 @@ function EvilHatPeep(scene){
     MODE_WALK = 0;
     MODE_GUN = 1;
     self.goThroughSpots = true;
-    self.callbacks.update = function(){
+    self.callbacks.update = function() {
 
-        if(self.x>420 && !self.isMurdering){
+        if (self.x > 420 * Game.width / 960 && !self.isMurdering) {
             self.itsMurderTime();
         }
 
         // Animate on triples.
-        doubles = (doubles+1)%3;
+        doubles = (doubles + 1) % 3;
         var gun = self.gunMC;
         var frame = gun.currentFrame;
-        if(doubles==0){
-            switch(MODE){
+        if (doubles == 0) {
+            switch (MODE) {
                 case MODE_GUN:
-                    if(frame<17) gun.gotoAndStop(frame+1);
+                    if (frame < 17) gun.gotoAndStop(frame + 1);
                     break;
             }
         }
 
         // SPEED ONLY WHEN SEEN
-        if(MODE==MODE_WALK){
+        if (MODE == MODE_WALK) {
             self.speed = scene.director.isWatchingTV ? 0 : 1.25;
         }
 
     };
 
     // WEIRD WALK
-    self.walkAnim = function(){
+    self.walkAnim = function() {
 
         // Hop & flip
-        self.hop += self.speed/40;
-        if(self.hop>1) self.hop--;
-        self.flip = (self.vel.x<0) ? -1 : 1;
+        self.hop += self.speed / 40;
+        if (self.hop > 1) self.hop--;
+        self.flip = (self.vel.x < 0) ? -1 : 1;
 
         // Hop up & down
-        var t = self.hop*Math.TAU;
+        var t = self.hop * Math.TAU;
         var g = self.graphics;
-        g.rotation = Math.sin(t)*0.2;
-        g.pivot.y = Math.abs(Math.sin(t))*7;
+        g.rotation = Math.sin(t) * 0.2;
+        g.pivot.y = Math.abs(Math.sin(t)) * 7;
 
     };
     // WOBBLE IN PLACE
@@ -103,7 +103,7 @@ function EvilHatPeep(scene){
     self.isMurdering = false;
     self.hasGunOut = false;
     self.pauseAnimsWhenNotWatching = true;
-    self.itsMurderTime = function(){
+    self.itsMurderTime = function() {
 
         // STOP.
         self.isMurdering = true;
@@ -112,30 +112,30 @@ function EvilHatPeep(scene){
 
         // Half Beat.
         // Happy Smiles at you.
-        self.setTimeout(function(){
+        self.setTimeout(function() {
             self.victim.smile();
-        },_s(0.5));
-        
+        }, _s(0.5));
+
         // +1.5 beats.
         // Pull out gun. Happy frowns.
         // AND EVERYONE FREEZES.
-        self.setTimeout(function(){
+        self.setTimeout(function() {
             self.hasGunOut = true;
             Game.sounds.bg_park.stop(); // STAHP.
             Game.sounds.gun_cock.play(); // SOUND
             MODE = MODE_GUN;
-        },_s(0.5+1.5));
-        self.setTimeout(function(){
+        }, _s(0.5 + 1.5));
+        self.setTimeout(function() {
             self.freezeEveryone();
             self.victim.frown();
-        },_s(0.5+1.5+0.5));
+        }, _s(0.5 + 1.5 + 0.5));
 
         // +4 beats.
         // BANG.
-        self.setTimeout(function(){
+        self.setTimeout(function() {
             Game.sounds.gunshot.play();
             self.bang();
-        },_s(0.5+1.5+4.0));
+        }, _s(0.5 + 1.5 + 4.0));
 
     }
 

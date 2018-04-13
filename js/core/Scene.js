@@ -4,14 +4,14 @@ SCENE BASE CLASS
 
 *************************************/
 
-function Scene(){
+function Scene() {
 
-	var self = this;
+    var self = this;
 
-	// TO IMPLEMENT
-	self.update = function(){};
+    // TO IMPLEMENT
+    self.update = function() {};
 
-	// TO IMPLEMENT
-	self.kill = function(){};
+    // TO IMPLEMENT
+    self.kill = function() {};
 
 }

@@ -12,41 +12,41 @@ for 20 seconds into "the real world".
 
 ******************************/
 
-function Stage_Evil(self, HACK){
+function Stage_Evil(self, HACK) {
 
     // HACK - The happy one
-    if(HACK){
+    if (HACK) {
         self.world.addPeep(new HappyWeirdoPeep(self));
         self.world.addProp(new ProtestAnim(self));
     }
 
-	// FREEZE EVERYONE
-	var _freezeEveryone = function(){
+    // FREEZE EVERYONE
+    var _freezeEveryone = function() {
 
-		var peeps = self.world.peeps;
+        var peeps = self.world.peeps;
 
-		// Freeze all Angry & Normal peeps.
-		var freezeEm = peeps.filter(function(peep){
-			return(peep._CLASS_=="NormalPeep" || peep._CLASS_=="AngryPeep");
-		});
-		freezeEm.forEach(function(oldPeep){
+        // Freeze all Angry & Normal peeps.
+        var freezeEm = peeps.filter(function(peep) {
+            return (peep._CLASS_ == "NormalPeep" || peep._CLASS_ == "AngryPeep");
+        });
+        freezeEm.forEach(function(oldPeep) {
 
-			var stunnedPeep = new NormalPeep(self);
-			stunnedPeep.setType(oldPeep.type);
+            var stunnedPeep = new NormalPeep(self);
+            stunnedPeep.setType(oldPeep.type);
             stunnedPeep.vel.x = oldPeep.vel.x;
             stunnedPeep.vel.y = oldPeep.vel.y;
-            stunnedPeep.flip = (oldPeep.x<Game.width/2) ? 1 : -1;
+            stunnedPeep.flip = (oldPeep.x < Game.width / 2) ? 1 : -1;
             stunnedPeep.beStunned();
             self.world.replacePeep(oldPeep, stunnedPeep);
             stunnedPeep.update(); // JUST. IN. CASE.
 
-		});
+        });
 
-		// Freeze the Protesters
-		var lovers = self.world.props.filter(function(prop){
-			return prop._CLASS_=="ProtestAnim";
-		})[0];
-		lovers.beStunned();
+        // Freeze the Protesters
+        var lovers = self.world.props.filter(function(prop) {
+            return prop._CLASS_ == "ProtestAnim";
+        })[0];
+        lovers.beStunned();
 
         // GOODBYE PARK SOUND
         Game.sounds.bg_park.stop();
@@ -54,16 +54,16 @@ function Stage_Evil(self, HACK){
     };
 
     // BANG
-    var _bang = function(){
+    var _bang = function() {
         Stage_Panic(self); // Next stage
     };
 
     // Happy Guy is prepared to die.
-    var happy = self.world.peeps.filter(function(peep){
-        return peep._CLASS_=="HappyWeirdoPeep";
+    var happy = self.world.peeps.filter(function(peep) {
+        return peep._CLASS_ == "HappyWeirdoPeep";
     })[0];
     happy.prepareForMurder();
-    
+
     // The MURDERER
     var murderer = new EvilHatPeep(self);
     murderer.victim = happy;
@@ -73,42 +73,44 @@ function Stage_Evil(self, HACK){
 
     // Director
     self.director.callbacks = {
-        takePhoto: function(d){
+        takePhoto: function(d) {
 
-            d.tryChyron(function(d){
-                var p = d.photoData;
-                if(murderer.hasGunOut){
-                    d.chyron = textStrings["ellipsis"];
-                    return true;
-                }else{
-                    var caught = d.caught({
-                        evil: {_CLASS_:"EvilHatPeep"}
-                    });
-                    if(caught.evil){
-                        d.chyron = textStrings["coolNoMore"];
+            d.tryChyron(function(d) {
+                    var p = d.photoData;
+                    if (murderer.hasGunOut) {
+                        d.chyron = textStrings["ellipsis"];
                         return true;
+                    } else {
+                        var caught = d.caught({
+                            evil: {
+                                _CLASS_: "EvilHatPeep"
+                            }
+                        });
+                        if (caught.evil) {
+                            d.chyron = textStrings["coolNoMore"];
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
-                }
-            })
-            .otherwise(_chyProtest)
-            .otherwise(_chyAngry)
-            .otherwise(_chyWeirdo)
-            .otherwise(_chyShocked)
-            .otherwise(_chyPeeps);
+                })
+                .otherwise(_chyProtest)
+                .otherwise(_chyAngry)
+                .otherwise(_chyWeirdo)
+                .otherwise(_chyShocked)
+                .otherwise(_chyPeeps);
 
         },
-        movePhoto: function(d){
+        movePhoto: function(d) {
             d.audience_movePhoto();
         },
-        cutToTV: function(d){
+        cutToTV: function(d) {
             d.audience_cutToTV();
         }
     };
 
 }
 
-function Stage_Panic(self){
+function Stage_Panic(self) {
 
     // CREEPY & PANIC MUSIC
     var panic = Game.sounds.bg_panic;
@@ -131,25 +133,25 @@ function Stage_Panic(self){
     // ONLY ONE AVOIDSPOT
     self.avoidSpots.splice(0, self.avoidSpots.length);
     self.avoidSpots.push({
-        x: 530,
-        y: 430,
+        x: 530 * Game.width / 960,
+        y: 430 * Game.width / 960,
         radius: 150
     });
 
     // Replace EVERYONE with a PANIC
     var peeps = self.world.peeps;
-    var normalPeeps = peeps.filter(function(peep){
-        return peep._CLASS_=="NormalPeep";
+    var normalPeeps = peeps.filter(function(peep) {
+        return peep._CLASS_ == "NormalPeep";
     });
-    normalPeeps.forEach(function(oldPeep){
+    normalPeeps.forEach(function(oldPeep) {
         var panicPeep = new PanicPeep(self);
         panicPeep.setType(oldPeep.type);
         self.world.replacePeep(oldPeep, panicPeep);
     });
 
     // Replace PROTEST ANIM with PANICKED LOVERS
-    var lovers = self.world.props.filter(function(prop){
-        return prop._CLASS_=="ProtestAnim";
+    var lovers = self.world.props.filter(function(prop) {
+        return prop._CLASS_ == "ProtestAnim";
     })[0];
     lovers.kill();
     var panicCircle = new PanicPeep(self);
@@ -160,8 +162,8 @@ function Stage_Panic(self){
     self.world.addPeep(panicSquare);
 
     // EXPLODE THE HAPPY ONE
-    var happy = self.world.peeps.filter(function(peep){
-        return peep._CLASS_=="HappyWeirdoPeep";
+    var happy = self.world.peeps.filter(function(peep) {
+        return peep._CLASS_ == "HappyWeirdoPeep";
     })[0];
 
     // Happy One's corpse.
@@ -174,17 +176,17 @@ function Stage_Panic(self){
         flip: -1,
         frame: 0
     });
-    self.world.addProp(deadbody);    
+    self.world.addProp(deadbody);
 
     // Gore Particles
-    for(var i=0;i<30;i++){
+    for (var i = 0; i < 30; i++) {
         var gore = new Gore(self);
         gore.init({
-            direction: -(Math.TAU/4)+(Math.random()),
-            velocity: 10+Math.random()*5,
+            direction: -(Math.TAU / 4) + (Math.random()),
+            velocity: 10 + Math.random() * 5,
             x: happy.x,
             y: happy.y,
-            z: (Math.random()*-30)
+            z: (Math.random() * -30)
         });
         self.world.addProp(gore);
     }
@@ -193,7 +195,7 @@ function Stage_Panic(self){
     happy.kill();
 
     // Zoomer... what to do when DONE?
-    self.zoomer.onComplete = function(){
+    self.zoomer.onComplete = function() {
 
         // Sounds stop
         creepyAmbience.stop();
@@ -208,38 +210,38 @@ function Stage_Panic(self){
     var weaponIndex = 0;
     var weapons = ["gun", "bat", "shotgun", "axe"];
     self.director.callbacks = {
-        takePhoto: function(d){
+        takePhoto: function(d) {
             var p = d.photoData;
             d.chyron = textStrings["beScared"];
             p.forceChyron = true;
             p.noChyronSound = true;
         },
-        movePhoto: function(d){
+        movePhoto: function(d) {
             d.audience_movePhoto();
         },
-        cutToTV: function(d){
-            
+        cutToTV: function(d) {
+
             d.audience_cutToTV();
 
             // Get rid of Hat Guy, if not done so already.
             var peeps = self.world.peeps;
-            var murderer = peeps.filter(function(peep){
-                return peep._CLASS_=="EvilHatPeep";
+            var murderer = peeps.filter(function(peep) {
+                return peep._CLASS_ == "EvilHatPeep";
             })[0];
-            if(murderer){
+            if (murderer) {
                 murderer.kill();
                 // AND NO AVOIDSPOTS ANYMORE
                 self.avoidSpots.splice(0, self.avoidSpots.length);
             }
 
             // DELETE ANY PREV MURDERERS.
-            var murderers = self.world.peeps.filter(function(peep){
-                return peep._CLASS_=="MurderPeep";
+            var murderers = self.world.peeps.filter(function(peep) {
+                return peep._CLASS_ == "MurderPeep";
             });
-            murderers.forEach(function(murderer){
+            murderers.forEach(function(murderer) {
                 murderer.kill();
             });
-            if(murderers.length>0 && !self.zoomer.started){
+            if (murderers.length > 0 && !self.zoomer.started) {
                 self.zoomer.init();
             }
 
@@ -248,13 +250,13 @@ function Stage_Panic(self){
             var murderer1 = new MurderPeep(self);
             murderer1.init("circle", weapon1);
             self.world.addPeep(murderer1);
-            var weapon2 = weapons[(weaponIndex+1)%weapons.length];
+            var weapon2 = weapons[(weaponIndex + 1) % weapons.length];
             var murderer2 = new MurderPeep(self);
             murderer2.init("square", weapon2);
             self.world.addPeep(murderer2);
 
             // Cycle through weapons...
-            weaponIndex = (weaponIndex+1)%weapons.length;
+            weaponIndex = (weaponIndex + 1) % weapons.length;
 
         }
     };

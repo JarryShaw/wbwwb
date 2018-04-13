@@ -17,37 +17,44 @@ ACT V - Post-credits peace
 
 *************************************/
 
-function Scene_Post_Credits(){
+function Scene_Post_Credits() {
 
-	var self = this;
-	Scene.call(self);
+    var self = this;
+    Scene.call(self);
 
     // HACK: Background Ambience
     /*var ambience = Game.sounds.bg_nighttime;
     ambience.loop(true);
     ambience.play();*/
 
-	////////////
-	// SET UP //
-	////////////
+    ////////////
+    // SET UP //
+    ////////////
 
     // Graphics!
     var g = new PIXI.Container();
     self.graphics = g;
     Game.stage.addChild(g);
 
-	// Set Up Everything
-    self.world = new World(self,{
+    // Set Up Everything
+    self.world = new World(self, {
         bg: "bg_dark"
     });
-    self.world.layers.bg.addChild(MakeSprite("bg_shade"));
-    self.camera = new Camera(self,{
+    var bg_shade = MakeSprite("bg_shade");
+    bg_shade.x = Game.width;
+    bg_shade.y = Game.height;
+    self.world.layers.bg.addChild(bg_shade);
+    self.camera = new Camera(self, {
         noIntro: true,
         streaming: true,
-        onTakePhoto: function(){
+        onTakePhoto: function() {
             //if(self.camera.isOverTV()){
             Game.sounds.bg_nighttime.stop();
+            // tmp = document.querySelector("#stage").childNodes[0];
+            // document.querySelector("#stage").removeChild(tmp);
+            // Game.init();
             Game.sceneManager.gotoScene("Post_Post_Credits");
+            // Game.sceneManager.gotoScene("Quote");
             //}
         }
     });
@@ -56,14 +63,15 @@ function Scene_Post_Credits(){
 
     // Put a SPRITE RIGHT IN THE BG
     self.stream = new PIXI.Sprite();
-    self.stream.width = Game.width/8;
-    self.stream.height = Game.height/8;
-    self.stream.x = Game.width/2 - self.stream.width/2 - 2; // hack
-    self.stream.y = Game.height/2 - self.stream.height/2 + 2; // hack
+    self.stream.width = Game.width / 9.5;
+    self.stream.height = Game.height / 9.5;
+    self.stream.anchor.x = self.stream.anchor.y = 0.5;
+    self.stream.x = Game.width / 2 - 1 * Game.width / 960; // hack
+    self.stream.y = Game.height / 2 + 1 * Game.width / 960; // hack
     self.world.layers.bg.addChild(self.stream);
 
     // UPDATE
-    self.update = function(){
+    self.update = function() {
 
         self.world.update();
         self.camera.update();
@@ -78,28 +86,34 @@ function Scene_Post_Credits(){
     //////////////////////
 
     // Candlelights
-    var candlePositions =[
-        [468.6,276.6],
-        [535.7,281.6],
-        [679.7,279.1],
-        [612,281.6],
-        [490.1,314.1],
-        [421.8,309],
-        [363.1,301.1],
-        [786.9,304.4],
-        [726.1,310.5],
-        [656.9,309.5],
-        [869.8,350.3],
-        [820,373.5],
-        [768.2,382.8],
-        [698.4,389],
-        [464.6,386.1],
-        [396.3,382.3],
-        [339.6,370.1],
-        [294.3,350.3]
+    var candlePositions = [
+        [-90, -82],
+        [-35, -77],
+        [27, -77],
+        [81, -81],
+        [-178, -60],
+        [-132, -55],
+        [-75, -53],
+        [65, -55],
+        [122, -52],
+        [171, -58],
+        [-235, -20],
+        [-200, -5],
+        [-152, 5],
+        [-95, 9],
+        [97, 10],
+        [156, 5],
+        [199, -3],
+        [240, -22]
     ];
-    for(var i=0;i<candlePositions.length;i++){
+    for (var i = 0; i < candlePositions.length; i++) {
         var pos = candlePositions[i];
+        // pos[0] = 480;
+        // pos[1] = 270;
+        pos[0] *= Game.width / 960;
+        pos[1] *= Game.width / 960;
+        pos[0] += Game.width / 2;
+        pos[1] += Game.height / 2;
         var candle = new Candlelight(pos);
         self.world.addBG(candle);
     }
@@ -114,11 +128,11 @@ function Scene_Post_Credits(){
         [420, 370],
         [450, 380]
     ];
-    for(var i=0;i<cricketPositions.length;i++){
+    for (var i = 0; i < cricketPositions.length; i++) {
         var pos = cricketPositions[i];
         var cricket = new Cricket(self);
-        cricket.x = pos[0];
-        cricket.y = pos[1];
+        cricket.x = pos[0] * Game.width / 960;
+        cricket.y = pos[1] * Game.width / 960;
         cricket.mc.gotoAndStop(1);
         self.world.addProp(cricket);
     }
@@ -128,8 +142,11 @@ function Scene_Post_Credits(){
     /////////////
 
     var blackout = MakeSprite("blackout");
+    blackout.scale.x = blackout.scale.y = Game.width / 960;
     Game.stage.addChild(blackout);
-    Tween_get(blackout).to({alpha:0}, _s(BEAT), Ease.quadInOut).call(function(){
+    Tween_get(blackout).to({
+        alpha: 0
+    }, _s(BEAT), Ease.quadInOut).call(function() {
         Game.stage.removeChild(blackout);
     });
 

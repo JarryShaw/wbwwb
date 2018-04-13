@@ -26,7 +26,7 @@ WEAPON FRAMES:
 
 ****/
 
-function MurderPeep(scene){
+function MurderPeep(scene) {
 
     var self = this;
     Peep.apply(self, [scene]);
@@ -40,26 +40,26 @@ function MurderPeep(scene){
     self.weaponMC = null;
 
     // Init with what kinda weapon?
-    self.init = function(shapeType, weaponType){
+    self.init = function(shapeType, weaponType) {
 
         // Type
         self.type = shapeType;
-        self.bodyMC.gotoAndStop((shapeType=="circle") ? 0 : 1);
+        self.bodyMC.gotoAndStop((shapeType == "circle") ? 0 : 1);
 
         // Weapon
         self.weaponType = weaponType;
-        self.weaponMC = self.addMovieClip("weapon_"+weaponType);
+        self.weaponMC = self.addMovieClip("weapon_" + weaponType);
         self.weaponMC.gotoAndStop(0);
 
         // Transform
         self.x = scene.tv.x;
-        self.y = scene.tv.y+Math.random(); // tiny offset to avoid glitchy depth-sort
-        if(shapeType=="circle"){
-            self.x -= 60;
+        self.y = scene.tv.y + Math.random(); // tiny offset to avoid glitchy depth-sort
+        if (shapeType == "circle") {
+            self.x -= 60 * Game.width / 960;
             self.flip = 1;
             self.gracePeriod = 30;
-        }else{
-            self.x += 60;
+        } else {
+            self.x += 60 * Game.width / 960;
             self.flip = -1;
             self.gracePeriod = 50;
         }
@@ -79,31 +79,34 @@ function MurderPeep(scene){
     var doubles = 0;
     self.gracePeriod = -1;
     self.standingTime = -1;
-    self.callbacks.update = function(){
-        
+    self.callbacks.update = function() {
+
         // Animate on doubles! ...or... TRIPLES?
-        doubles = (doubles+1)%4;
+        doubles = (doubles + 1) % 4;
 
         // stay within game frame
         self.stayWithinRect({
-            l:100, r:860, t:100, b:480
-        },0.15);
+            l: 100 * Game.width / 960,
+            r: 860 * Game.width / 960,
+            t: 100 * Game.width / 960,
+            b: 480 * Game.width / 960
+        }, 0.15);
 
         // FRAMES: MANUALLY
-        if(doubles==0){
+        if (doubles == 0) {
 
             var frame;
 
             // Face
             var face = self.faceMC;
             frame = face.currentFrame;
-            switch(MODE){
+            switch (MODE) {
                 case MODE_STARE:
-                    if(frame<4) face.gotoAndStop(frame+1);
+                    if (frame < 4) face.gotoAndStop(frame + 1);
                     else face.gotoAndStop(0);
                     break;
                 case MODE_CRAZY:
-                    if(frame<13) face.gotoAndStop(frame+1);
+                    if (frame < 13) face.gotoAndStop(frame + 1);
                     else face.gotoAndStop(9);
                     break;
             }
@@ -111,18 +114,18 @@ function MurderPeep(scene){
             // Weapon
             var weapon = self.weaponMC;
             frame = weapon.currentFrame;
-            if(MODE==MODE_CRAZY || MODE==MODE_KILL){
-                if(frame<5){
-                    weapon.gotoAndStop(frame+1);
+            if (MODE == MODE_CRAZY || MODE == MODE_KILL) {
+                if (frame < 5) {
+                    weapon.gotoAndStop(frame + 1);
                 }
-                if(frame>=6){
-                    if(frame<15){
-                        weapon.gotoAndStop(frame+1);
-                    }else{
-                        if(self.standingTime<=0){
+                if (frame >= 6) {
+                    if (frame < 15) {
+                        weapon.gotoAndStop(frame + 1);
+                    } else {
+                        if (self.standingTime <= 0) {
                             self.startWalking();
                             weapon.gotoAndStop(5);
-                        }else{
+                        } else {
                             self.standingTime--;
                         }
                     }
@@ -136,21 +139,21 @@ function MurderPeep(scene){
         ///////////////////////////
 
         // KILL THE OTHER KIND
-        if(self.gracePeriod<=0){
-            if(!self.isShocked){
-                var otherType = (self.type=="circle") ? "square" : "circle";
-                var closeTo = self.touchingPeeps(120, function(peep){
-                    return(peep._CLASS_=="PanicPeep" && peep.type==otherType);
+        if (self.gracePeriod <= 0) {
+            if (!self.isShocked) {
+                var otherType = (self.type == "circle") ? "square" : "circle";
+                var closeTo = self.touchingPeeps(120 * DiviceScreenwidth / 960, function(peep) {
+                    return (peep._CLASS_ == "PanicPeep" && peep.type == otherType);
                 });
-                if(closeTo.length>0 && self.isWalking){
+                if (closeTo.length > 0 && self.isWalking) {
 
                     // FACE 'EM
-                    self.flip = (closeTo[0].x>self.x) ? 1 : -1;
+                    self.flip = (closeTo[0].x > self.x) ? 1 : -1;
 
                     // USE WEAPON
                     MODE = MODE_KILL;
                     self.weaponMC.gotoAndStop(6);
-                    self.gracePeriod = _s(BEAT*2);
+                    self.gracePeriod = _s(BEAT * 2);
                     self.bounce = 1.6;
                     self.standingTime = 5; // hack
                     self.stopWalking();
@@ -158,11 +161,12 @@ function MurderPeep(scene){
                     // What sound?
                     var sound = null;
                     var volume = 0.2;
-                    switch(self.weaponType){
+                    switch (self.weaponType) {
                         case "gun":
                             sound = Game.sounds.gunshot;
                             break;
-                        case "axe": case "bat":
+                        case "axe":
+                        case "bat":
                             sound = Game.sounds.impact;
                             break;
                         case "shotgun":
@@ -177,67 +181,67 @@ function MurderPeep(scene){
 
                 }
             }
-        }else if(self.isWalking){
+        } else if (self.isWalking) {
             self.gracePeriod--;
         }
 
     };
 
     // Speed...
-    self.callbacks.startWalking = function(){
+    self.callbacks.startWalking = function() {
         self.speed = 3;
     };
 
     // SAME WALK ANIM, EXCEPT: RANDOM ROTATION
-    self.walkAnim = function(){
+    self.walkAnim = function() {
         var g = self.graphics;
 
         // Hop & Flip
-        self.hop += self.speed/40;
-        if(self.hop>1) self.hop--;
-        self.flip = (self.vel.x<0) ? -1 : 1;
+        self.hop += self.speed / 40;
+        if (self.hop > 1) self.hop--;
+        self.flip = (self.vel.x < 0) ? -1 : 1;
 
         // Sway back & forth
-        var t = self.hop*Math.PI*2;
-        g.pivot.y = Math.abs(Math.sin(t))*15;
-        g.rotation = (Math.random()*2-1)*0.05;
+        var t = self.hop * Math.PI * 2;
+        g.pivot.y = Math.abs(Math.sin(t)) * 15;
+        g.rotation = (Math.random() * 2 - 1) * 0.05;
 
     };
 
     // SAME STAND ANIM, EXCEPT: RANDOM ROTATION
-    self.standAnim = function(){
+    self.standAnim = function() {
         var g = self.graphics;
-        g.rotation = (Math.random()*2-1)*0.05;
+        g.rotation = (Math.random() * 2 - 1) * 0.05;
         g.pivot.y = 0;
     };
 
     // AT FIRST...
-    self.watchTV = function(){
+    self.watchTV = function() {
 
         self.clearAnims(); // just in case...
-        
+
         // 0) Stop & look
         var tv = scene.tv;
         self.stopWalking(true);
-        self.flip = (tv.x>self.x) ? 1 : -1;
+        self.flip = (tv.x > self.x) ? 1 : -1;
         var OFFSET = 0; // (Math.abs(self.x-tv.x)-60)/100;
         var WAIT = Director.ZOOM_OUT_1_TIME + Director.SEE_VIEWERS_TIME;
 
         // 1) Become nervous
-        self.setTimeout(function(){
+        self.setTimeout(function() {
             self.bounce = 1.6;
-            MODE = MODE_CRAZY;            
-        },_s(OFFSET+BEAT*2));
+            MODE = MODE_CRAZY;
+        }, _s(OFFSET + BEAT * 2));
 
         // 3) And go on.
-        self.setTimeout(function(){
+        self.setTimeout(function() {
             self.startWalking();
-            if(self.type=="circle"){
-                self.direction = Math.PI + (Math.random()*2-1);
-            }else{
-                self.direction = (Math.random()*2-1);
+            if (self.type == "circle") {
+                self.direction = Math.PI + (Math.random() * 2 - 1);
+            } else {
+                self.direction = (Math.random() * 2 - 1);
             }
-        },_s(OFFSET+WAIT+1));
+        }, _s(OFFSET + WAIT + 1));
 
     };
 

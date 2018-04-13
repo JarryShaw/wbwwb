@@ -7,7 +7,7 @@ ACT I: THE SETUP
 
 ******************************/
 
-function Stage_Start(self){
+function Stage_Start(self) {
 
     // Create Peeps
     self.world.clearPeeps();
@@ -15,23 +15,25 @@ function Stage_Start(self){
 
 }
 
-function Stage_Hat(self){
+function Stage_Hat(self) {
 
-	// A Hat Guy
-	var hat = new HatPeep(self);
+    // A Hat Guy
+    var hat = new HatPeep(self);
     self.world.addPeep(hat);
 
     // Director
     self.director.callbacks = {
-        takePhoto: function(d){
+        takePhoto: function(d) {
 
             // DECLARATIVE
-            d.tryChyron(function(d){
+            d.tryChyron(function(d) {
                 var p = d.photoData;
                 var caught = d.caught({
-                    hat: {_CLASS_:"HatPeep"}
+                    hat: {
+                        _CLASS_: "HatPeep"
+                    }
                 });
-                if(caught.hat){
+                if (caught.hat) {
                     p.audience = 3;
                     p.caughtHat = caught.hat;
                     d.chyron = textStrings["niceHat"];
@@ -41,21 +43,21 @@ function Stage_Hat(self){
             }).otherwise(_chyPeeps);
 
         },
-        movePhoto: function(d){
+        movePhoto: function(d) {
             d.audience_movePhoto();
         },
-        cutToTV: function(d){
+        cutToTV: function(d) {
 
             // If you did indeed catch a hat peep...
             var p = d.photoData;
-            if(p.caughtHat){
+            if (p.caughtHat) {
                 self.world.addBalancedPeeps(1); // Add with moar!
-                d.audience_cutToTV(function(peep){
+                d.audience_cutToTV(function(peep) {
                     peep.wearHat();
                 }); // make all viewers wear HATS!
                 p.caughtHat.kill(); // Get rid of hat
                 Stage_Lovers(self); // Next stage
-            }else{
+            } else {
                 d.audience_cutToTV();
             }
 
@@ -64,7 +66,7 @@ function Stage_Hat(self){
 
 }
 
-function Stage_Lovers(self){
+function Stage_Lovers(self) {
 
     // LOVERS
     var lover1 = new LoverPeep(self);
@@ -77,23 +79,23 @@ function Stage_Lovers(self){
 
     // Director
     self.director.callbacks = {
-        takePhoto: function(d){
+        takePhoto: function(d) {
 
             // MODULAR & DECLARATIVE
             d.tryChyron(_chyLovers)
-             .otherwise(_chyHats)
-             .otherwise(_chyPeeps);
+                .otherwise(_chyHats)
+                .otherwise(_chyPeeps);
 
         },
-        movePhoto: function(d){
+        movePhoto: function(d) {
             d.audience_movePhoto();
         },
-        cutToTV: function(d){
+        cutToTV: function(d) {
 
             // MODULAR & DECLARATIVE
             d.tryCut2TV(_cutLovers)
-             .otherwise(_cutHats)
-             .otherwise(_cutPeeps);
+                .otherwise(_cutHats)
+                .otherwise(_cutPeeps);
 
             // And whatever happens, just go to the next stage
             // ACT II!!!
@@ -110,15 +112,17 @@ function Stage_Lovers(self){
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-function _chyLovers(d){
+function _chyLovers(d) {
     var p = d.photoData;
     var caught = d.caught({
-        lover: {_CLASS_:"LoverPeep"}
+        lover: {
+            _CLASS_: "LoverPeep"
+        }
     });
-    if(caught.lover){
-        if(caught.lover.isEmbarrassed){
+    if (caught.lover) {
+        if (caught.lover.isEmbarrassed) {
             d.chyron = textStrings["outtaHere"];
-        }else{
+        } else {
             p.caughtLovers = true;
             p.forceChyron = true;
             d.chyron = textStrings["getARoom"];
@@ -127,12 +131,16 @@ function _chyLovers(d){
     }
     return false;
 }
-function _chyHats(d){
+
+function _chyHats(d) {
     var p = d.photoData;
     var caught = d.caught({
-        hat: {_CLASS_:"NormalPeep", wearingHat:true}
+        hat: {
+            _CLASS_: "NormalPeep",
+            wearingHat: true
+        }
     });
-    if(caught.hat){
+    if (caught.hat) {
         p.audience = 1;
         p.caughtHat = true;
         d.chyron = textStrings["notCoolAnymore"];
@@ -140,29 +148,36 @@ function _chyHats(d){
     }
     return false;
 }
-function _chyPeeps(d){
+
+function _chyPeeps(d) {
     var p = d.photoData;
-    if(d.scene.camera.isOverTV(true)){
+    if (d.scene.camera.isOverTV(true)) {
         d.chyron = textStrings["tvOnTv"];
-    }else{
+    } else {
         var caught = d.caught({
-            peeps: {_CLASS_:"NormalPeep", returnAll:true},
-            crickets: {_CLASS_:"Cricket", returnAll:true}
+            peeps: {
+                _CLASS_: "NormalPeep",
+                returnAll: true
+            },
+            crickets: {
+                _CLASS_: "Cricket",
+                returnAll: true
+            }
         });
-        if(caught.crickets.length>0){
+        if (caught.crickets.length > 0) {
             p.CAUGHT_A_CRICKET = true;
-            if(caught.crickets.length==1){
+            if (caught.crickets.length == 1) {
                 d.chyron = textStrings["cricky"];
-            }else{
+            } else {
                 d.chyron = textStrings["tooManyCrickets"];
             }
-        }else if(caught.peeps.length>0){
-            if(caught.peeps.length==1){
+        } else if (caught.peeps.length > 0) {
+            if (caught.peeps.length == 1) {
                 d.chyron = textStrings["normalPeep"];
-            }else{
+            } else {
                 d.chyron = textStrings["normalPeeps"];
             }
-        }else{
+        } else {
             p.ITS_NOTHING = true;
             d.chyron = textStrings["wowNothing"];
         }
@@ -176,44 +191,50 @@ function _chyPeeps(d){
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-function _cutLovers(d){
+function _cutLovers(d) {
     var p = d.photoData;
-    if(p.caughtLovers){
+    if (p.caughtLovers) {
         // Crickets
         d.audience_cutToTV();
         // MAKE LOVERS EMBARRASSED
-        d.scene.world.peeps.filter(function(peep){
-            return peep._CLASS_=="LoverPeep";
-        }).forEach(function(lover){
+        d.scene.world.peeps.filter(function(peep) {
+            return peep._CLASS_ == "LoverPeep";
+        }).forEach(function(lover) {
             lover.makeEmbarrassed();
         });
         return true;
-    }else{
+    } else {
         return false;
     }
 }
-function _cutHats(d){
+
+function _cutHats(d) {
     var p = d.photoData;
-    if(p.caughtHat){
+    if (p.caughtHat) {
         // Only get the hat-wearers, make 'em take off the hat.
         d.audience_cutToTV(
-            function(peep){ peep.takeOffHat(); },
-            function(peep){ return peep.wearingHat; }
+            function(peep) {
+                peep.takeOffHat();
+            },
+            function(peep) {
+                return peep.wearingHat;
+            }
         );
         return true;
-    }else{
+    } else {
         // And if not, have them decrease by 1 each time anyway.
-        var hatPeeps = d.scene.world.peeps.slice(0).filter(function(peep){
+        var hatPeeps = d.scene.world.peeps.slice(0).filter(function(peep) {
             return peep.wearingHat;
         });
-        if(hatPeeps.length>0){
-            var randomIndex = Math.floor(Math.random()*hatPeeps.length);
+        if (hatPeeps.length > 0) {
+            var randomIndex = Math.floor(Math.random() * hatPeeps.length);
             hatPeeps[randomIndex].takeOffHat(true);
         }
         return false;
     }
 }
-function _cutPeeps(d){
+
+function _cutPeeps(d) {
     d.audience_cutToTV();
     return true;
 }

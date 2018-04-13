@@ -13,7 +13,7 @@ var textStrings_EN = {
     "normalPeep"           : "just a normal peep"                                    ,
     "normalPeeps"          : "just some normal peeps"                                ,
     "wowNothing"           : "WOWWEE, IT'S NOTHING"                                  ,
-    
+
     // Act 2
     "crazySquareAttacks"   : "CRAZED SQUARE ATTACKS"                                 ,
     "justMissed"           : "oooooh just missed it"                                 ,
@@ -32,12 +32,12 @@ var textStrings_EN = {
     "nerdsNow"             : "what are these nerds doing now"                        ,
     "schockedPeep"         : "why's this peep shocked?"                              ,
     "whatever"             : "whatever"                                              ,
-    
+
     // Act 3
     "ellipsis"             : ". . ."                                                 ,
     "coolNoMore"           : "hats ain't cool no more, haven't you heard?"           ,
     "beScared"             : "BE SCARED. BE ANGRY."                                  ,
-    
+
     // MANIFESTO
     "manifesto" : [
        //"as if you viewers want GOOD news"       ,
@@ -48,57 +48,57 @@ var textStrings_EN = {
        //"...GIVE THE AUDIENCE WHAT THEY WANT."   ,
        "GIVE THE AUDIENCE WHAT THEY WANT."
     ] ,
-    
+
     // -- Strings currently in graphics resources --
-    
+
     // (bg_preload.png) Preload screen
     "playingTime"        : "playing time: 5 minutes" ,
     "warning"            : "warning: the following program\ncontains scenes of snobbery,\nrudeness & mass murder.\nviewer discretion is advised." ,
-    
+
     // (cam-instructions.png) Camera Instructions
     "pointAndClick"      : "POINT & CLICK" ,
-    
+
     // (chyron3.png)
     "chyronNothing"      : "WOWWEE, IT'S *NOTHING*" ,
-    
+
     // (credits0001.png)
     "createdBy"          : "created by" ,
     "NickyCase"          : "Nicky Case" ,
-    
+
     // (credits0002.png)
     "manyThanks"         : "many thanks to my playtesters:" ,
-    
+
     // (credits000[3,4,5,6].png)
     "patreonSupporters"  : "and to my patreon supporters:" ,
-    
+
     // (credits0007.png)
     "lastButNotLeast"    : "and last but not least," ,
-    
+
     // (credits0008.png)
     "thankYouForPlaying" : "thank YOU for playing!" ,
-    
+
     // (preload_play.png)
     "playButton"         : "PLAY" ,
-    
+
     // (end_button.png) Post Credits
     "otherWorkButton"    : "see my other work" ,
     "buyCoffeeButton"    : "buy me a coffee" ,
     "replayButton"       : "replay this mess" ,
-    
+
     // (logo.png) Post Credits
     "logoWBWWB"          : "SHARE THE PAIN:" ,
-    
+
     // (end_prototype.png)
     "endOfPrototype"     : "END OF PROTOTYPE" ,
     "toBeContinued"      : "(to be continued!)" ,
-    
+
     // (quote0002.png)
     "WBWWB"              : "We become what we behold." ,
     "WSOTATOTSU"         : "We shape our tools and then our tools shape us." ,
-    
+
     // (quote0003.png)
     "MarshallMcLuhan"    : "Marshall McLuhan" ,
-    
+
     // (quote0004.png)
     "misatrributed"      : "(misattributed)" ,
 };
@@ -115,7 +115,7 @@ var textStrings_CN = {
  +    "normalPeep"           : "就是一个正常人"                                    ,
  +    "normalPeeps"          : "就是一些正常人"                                ,
  +    "wowNothing"           : "WOW,什么也没有"                                  ,
- +    
+ +
  +    // Act 2
  +    "crazySquareAttacks"   : "疯狂小方攻击"                                 ,
  +    "justMissed"           : "ohhh差点就错过了"                                 ,
@@ -134,12 +134,12 @@ var textStrings_CN = {
  +    "nerdsNow"             : "这些人在做什么"                        ,
  +    "schockedPeep"         : "为什么这个人在害怕？"                              ,
  +    "whatever"             : "无论什么"                                              ,
- +    
+ +
  +    // Act 3
  +    "ellipsis"             : ". . ."                                                 ,
  +    "coolNoMore"           : "帽子不在酷了，你听说了么？"           ,
  +    "beScared"             : "害怕吧，生气吧"                                  ,
- +    
+ +
  +    // MANIFESTO
  +    "manifesto" : [
  +       //"as if you viewers want GOOD news"       ,
@@ -150,57 +150,57 @@ var textStrings_CN = {
  +       //"...GIVE THE AUDIENCE WHAT THEY WANT."   ,
  +       "GIVE THE AUDIENCE WHAT THEY WANT."
  +    ] ,
- +    
+ +
  +    // -- Strings currently in graphics resources --
- +    
+ +
  +    // (bg_preload.png) Preload screen
  +    "playingTime"        : "游玩时间: 5 分钟" ,
  +    "warning"            : "警告: 这个游戏\n包含暴力,\n无礼和大规模屠杀内容.\n请自行选择是否游玩." ,
- +    
+ +
  +    // (cam-instructions.png) Camera Instructions
  +    "pointAndClick"      : "点击 & 拍摄" ,
- +    
+ +
  +    // (chyron3.png)
  +    "chyronNothing"      : "WOWWEE, *什么都没有*" ,
- +    
+ +
  +    // (credits0001.png)
  +    "createdBy"          : "created by" ,
  +    "NickyCase"          : "Nicky Case" ,
- +    
+ +
  +    // (credits0002.png)
  +    "manyThanks"         : "many thanks to my playtesters:" ,
- +    
+ +
  +    // (credits000[3,4,5,6].png)
  +    "patreonSupporters"  : "and to my patreon supporters:" ,
- +    
+ +
  +    // (credits0007.png)
  +    "lastButNotLeast"    : "and last but not least," ,
- +    
+ +
  +    // (credits0008.png)
  +    "thankYouForPlaying" : "感谢您的游玩!" ,
- +    
+ +
  +    // (preload_play.png)
  +    "playButton"         : "开始" ,
- +    
+ +
  +    // (end_button.png) Post Credits
  +    "otherWorkButton"    : "see my other work" ,
  +    "buyCoffeeButton"    : "buy me a coffee" ,
  +    "replayButton"       : "replay this mess" ,
- +    
+ +
  +    // (logo.png) Post Credits
  +    "logoWBWWB"          : "SHARE THE PAIN:" ,
- +    
+ +
  +    // (end_prototype.png)
  +    "endOfPrototype"     : "END OF PROTOTYPE" ,
  +    "toBeContinued"      : "(to be continued!)" ,
- +    
+ +
  +    // (quote0002.png)
  +    "WBWWB"              : "We become what we behold." ,
  +    "WSOTATOTSU"         : "我们塑造我们的工具，然后我们的工具塑造我们。." ,
- +    
+ +
  +    // (quote0003.png)
  +    "MarshallMcLuhan"    : "Marshall McLuhan" ,
- +    
+ +
  +    // (quote0004.png)
  +    "misatrributed"      : "(misattributed)" ,
  +};
@@ -218,7 +218,7 @@ var textStrings_DE = {
     "normalPeep"           : "Ein gew\xF6hnlicher Typ."                                          ,
     "normalPeeps"          : "Ein paar gew\xF6hnliche Typen."                                    ,
     "wowNothing"           : "Wow! Nichts! Gar nix!"                                             ,
-    
+
     // Act 2
     "crazySquareAttacks"   : "Verr\xFCcktes Quadrat greift an!"                                  ,
     "justMissed"           : "Ooooh, knapp verpasst."                                            ,
@@ -237,12 +237,12 @@ var textStrings_DE = {
     "nerdsNow"             : "Was machen diese Nerds jetzt?"                                     ,
     "schockedPeep"         : "Warum ist er geschockt?"                                           ,
     "whatever"             : "Egal..."                                                           ,
-    
+
     // Act 3
     "ellipsis"             : ". . ."                                                             ,
     "coolNoMore"           : "H\xFCte sind out. Hast du's immer noch nicht geh\xF6rt?"           ,
     "beScared"             : "HABT ANGST! SEID W\xDCTEND!"                                        ,
-    
+
     // MANIFESTO
     "manifesto" : [
        //"Als ob ihr an guten Nachrichten interessiert seid."     ,
@@ -253,57 +253,57 @@ var textStrings_DE = {
        //"...GIB DEM PUBLIKUM WAS ES WILL!"                       ,
        "GIB DEM PUBLIKUM WAS ES WILL!"
     ] ,
-    
+
     // -- Strings currently in graphics resources --
-    
+
     // (bg_preload.png) Preload screen
     "playingTime"        : "Spielzeit: 5 Minuten" ,
     "warning"            : "Warnung: die folgende Sendung\nenth\xE4lt Darstellungen von Arroganz,\nBeleidigungen & Gewalt.\nund ist nicht f\xFCr Kinder geeignet." ,
-    
+
     // (cam-instructions.png) Camera Instructions
     "pointAndClick"      : "POINT & CLICK" , // I'd leave that in English, even for the German translation. /stefan
-    
+
     // (chyron3.png)
     "chyronNothing"      : "Oh wow, *NICHTS*!" ,
-    
+
     // (credits0001.png)
     "createdBy"          : "created by" , // I'd leave that in English, even for the German translation. /stefan
     "NickyCase"          : "Nicky Case" , // name; just here in case you want to display text instead of graphic. /stefan
-    
+
     // (credits0002.png)
     "manyThanks"         : "Vielen Dank an alle Tester:" ,
-    
+
     // (credits000[3,4,5,6].png)
     "patreonSupporters"  : "und an meine Patreon Unterst\xFCtzer:" ,
-    
+
     // (credits0007.png)
     "lastButNotLeast"    : "und zu guter Letzt," ,
-    
+
     // (credits0008.png)
     "thankYouForPlaying" : "Danke an DICH f\xFCr's spielen!" ,
-    
+
     // (preload_play.png)
     "playButton"         : "START" ,
-    
+
     // (end_button.png) Post Credits
     "otherWorkButton"    : "andere Projekte" ,
     "buyCoffeeButton"    : "kauf mir einen Kaffee" ,
     "replayButton"       : "noch mal spielen" ,
-    
+
     // (logo.png) Post Credits
     "logoWBWWB"          : "TEILE DEINEN SCHMERZ:" ,
-    
+
     // (end_prototype.png)
     "endOfPrototype"     : "ENDE DES PROTOTYPS" ,
     "toBeContinued"      : "(wird fortgesetzt!)" ,
-    
+
     // (quote0002.png)
     "WBWWB"              : "We become what we behold." , // I'd leave that in English, even for the German translation. /stefan
     "WSOTATOTSU"         : "Wir formen unsere Werkzeuge, und dann formen unsere Werkzeuge uns." ,
-    
+
     // (quote0003.png)
     "MarshallMcLuhan"    : "Marshall McLuhan" , // name; just here in case you want to display text instead of graphic. /stefan
-    
+
     // (quote0004.png)
     "misatrributed"      : "(falsch zugeschrieben)" ,
 };
@@ -320,7 +320,7 @@ var textStrings_FR = {
     "normalPeep"           : "c'est juste un gars normal"                                       ,
     "normalPeeps"          : "simplement des gars normaux"                                      ,
     "wowNothing"           : "Waaaa, ce n'est rien..."                                          ,
-    
+
     // Act 2
     "crazySquareAttacks"   : "ATTAQUE D'UN CARRÉ FOU"                                                ,
     "justMissed"           : "oooooh, raté"                                                          ,
@@ -339,12 +339,12 @@ var textStrings_FR = {
     "nerdsNow"             : "que font ces intellos en ce moment"                                    ,
     "schockedPeep"         : "pourquoi ce peep est choqué?"                                          ,
     "whatever"             : "peu importe"                                                           ,
-    
+
     // Act 3
     "ellipsis"             : ". . ."                                                                ,
     "coolNoMore"           : "les chapeaux ne sont plus à la mode, vous ne le savez pas?"           ,
     "beScared"             : "SOIS TERRORISÉ, SOIS EN COLÈRE."                                      ,
-    
+
     // MANIFESTO
     "manifesto" : [
        //"as if you viewers want GOOD news"       ,
@@ -355,60 +355,60 @@ var textStrings_FR = {
        //"...GIVE THE AUDIENCE WHAT THEY WANT."   ,
        "DONNE AU PUBLIC CE QU'IL VEUT."
     ] ,
-    
+
     // -- Strings currently in graphics resources --
-    
+
     // (bg_preload.png) Preload screen
     "playingTime"        : "temps de jeu: 5 minutes" ,
     "warning"            : "attention: le programme contient des scènes de dénigrement, de violence verbale et physique et notamment, de meurtres de masse.\n ce programme s'adresse à un public majeur averti." ,
-    
+
     // (cam-instructions.png) Camera Instructions
     "pointAndClick"      : "POINTEZ & CLIQUEZ" ,
-    
+
     // (chyron3.png)
     "chyronNothing"      : "WAAAA, CE N'EST *RIEN*" ,
-    
+
     // (credits0001.png)
     "createdBy"          : "créé par" ,
     "NickyCase"          : "Nicky Case" ,
-    
+
     // (credits0002.png)
     "manyThanks"         : "mille mercis à mes testeurs:" ,
-    
+
     // (credits000[3,4,5,6].png)
     "patreonSupporters"  : "et à mes soutiens sur Patreons:" ,
-    
+
     // (credits0007.png)
     "lastButNotLeast"    : "et pour finir," ,
-    
+
     // (credits0008.png)
     "thankYouForPlaying" : "merci à VOUS d'avoir joué!" ,
-    
+
     // (preload_play.png)
     "playButton"         : "JOUER" ,
-    
+
     // (end_button.png) Post Credits
     "otherWorkButton"    : "mes autres réalisations" ,
     "buyCoffeeButton"    : "paye moi un café" ,
     "replayButton"       : "rejoue ce truc" ,
-    
+
     // (logo.png) Post Credits
     "logoWBWWB"          : "PARTAGE LA DOULEUR:" ,
-    
+
     // (end_prototype.png)
     "endOfPrototype"     : "FIN DU PROTOTYPE" ,
     "toBeContinued"      : "(à suivre!)" ,
-    
+
     // (quote0002.png)
     "WBWWB"              : "Nous devenons ce que nous regardons." ,
     "WSOTATOTSU"         : "Les outils que nous créons, finissent par nous façonner." ,
-    
+
     // (quote0003.png)
     "MarshallMcLuhan"    : "Marshall McLuhan" ,
-    
+
     // (quote0004.png)
     "misatrributed"      : "(attribué par erreur)" ,
-    
+
 };
 
 var textStrings_ES = {

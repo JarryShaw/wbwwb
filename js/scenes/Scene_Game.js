@@ -12,21 +12,21 @@ ACT V - Post-credits peace
 
 *************************************/
 
-function Scene_Game(){
+function Scene_Game() {
 
-	var self = this;
-	Scene.call(self);
+    var self = this;
+    Scene.call(self);
 
-	////////////
-	// SET UP //
-	////////////
+    ////////////
+    // SET UP //
+    ////////////
 
     // Graphics!
     var g = new PIXI.Container();
     self.graphics = g;
     Game.stage.addChild(g);
 
-	// Set Up Everything
+    // Set Up Everything
     self.world = new World(self);
     self.camera = new Camera(self);
     self.director = new Director(self);
@@ -43,8 +43,8 @@ function Scene_Game(){
     self.avoidSpots = [];
 
     // UPDATE
-    self.update = function(){
-        
+    self.update = function() {
+
         self.world.update();
         self.camera.update();
         self.director.update();
@@ -58,17 +58,17 @@ function Scene_Game(){
         self.zoomer.fixLaptop(); // hack.
 
         // TOTALLY A HACK
-        var ratio = self.zoomer.timer/self.zoomer.fullTimer;
-        ratio = (1-ratio)/1;
-        self.shaker.baseAlpha = 0.15 + ratio*0.45;
+        var ratio = self.zoomer.timer / self.zoomer.fullTimer;
+        ratio = (1 - ratio) / 1;
+        self.shaker.baseAlpha = 0.15 + ratio * 0.45;
 
     };
 
-	// TO IMPLEMENT
-	self.kill = function(){};
+    // TO IMPLEMENT
+    self.kill = function() {};
 
     // Going to a Stage
-    self.go = function(sceneFunc){
+    self.go = function(sceneFunc) {
         sceneFunc(self);
         self.update();
     };
@@ -78,8 +78,11 @@ function Scene_Game(){
     /////////////
 
     var blackout = MakeSprite("blackout");
+    blackout.scale.x = blackout.scale.y = window.screen.width / 960;
     Game.stage.addChild(blackout);
-    Tween_get(blackout).to({alpha:0}, _s(BEAT), Ease.quadInOut).call(function(){
+    Tween_get(blackout).to({
+        alpha: 0
+    }, _s(BEAT), Ease.quadInOut).call(function() {
         Game.stage.removeChild(blackout);
     });
 
